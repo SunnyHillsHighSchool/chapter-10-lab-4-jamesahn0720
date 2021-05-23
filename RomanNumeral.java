@@ -16,14 +16,14 @@ public class RomanNumeral
 	public RomanNumeral(String str)
 	{
 
-
+	roman = str;
 
 	}
 
 	public RomanNumeral(Integer orig)
 	{
 
-
+	number = orig;
 
 	}
 
@@ -31,7 +31,7 @@ public class RomanNumeral
 	{
 
 
-
+	number = num;
 
 
 	}
@@ -39,17 +39,43 @@ public class RomanNumeral
 	public void setRoman(String rom)
 	{
 
-
+	roman = rom;
 
 	}
 
 	public Integer getNumber()
 	{
-		return number;
+		Integer sum = 0;
+		while(roman.length()>0)
+    {
+      for(int i = 0; i < LETTERS.length; i++)
+      {
+        if(roman.indexOf(LETTERS[i])==0)
+        {
+          sum+=NUMBERS[i];
+          roman = roman.substring(LETTERS[i].length());
+          i=LETTERS.length;
+        }
+      }
+    }
+    return sum;
 	}
 
 	public String toString()
 	{
-		return roman + "\n";
+		String s = "";
+    while(number>0)
+    {
+      for(int i = 0; i < NUMBERS.length; i++)
+      {
+        if(number>=NUMBERS[i])
+        {
+          s = s+LETTERS[i];
+          number-=NUMBERS[i];
+          i=NUMBERS.length;
+        }
+      }
+    }
+    return s;
 	}
 }
